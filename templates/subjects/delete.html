@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+
+    <div class="app-container">
+
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <i class="fas fa-book"></i>
+            <h2>
+                Study Tracker
+                <span>Semester 3</span>
+            </h2>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="/deshboard_subjects/" class="nav-item ">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </a>
+
+            <a href="/subjects/" class="nav-item">
+                <i class="fas fa-book-open"></i>
+                Subjects
+            </a>
+
+            <a href="/topics/" class="nav-item">
+                <i class="fas fa-tasks"></i>
+                Topic
+            </a>
+
+            
+        </nav>
+
+        <div class="logout">
+            <a href="/login/" class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+    <div class="subject-page">
+
+    <div class="subject-page-header">
+        <div>
+            <h1>Delete Subject</h1>
+            <p>Search a subject to delete.</p>
+        </div>
+
+        <a href="/subjects/" class="add-subject-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Subjects
+        </a>
+    </div>
+
+    <form method="POST" action="/subjects/searchdelete/" class="delete-search">
+            {% csrf_token %}
+            <div class="search-box">
+                <input type="text" placeholder="Search topics By Name" name="s" >
+            `   <button type="submit">🔍</button>
+        </div>
+        </form>
+        
+        <br><br>
+
+    <!-- ONLY SEARCHED SUBJECT DATA -->
+
+    {% if a_data %}
+
+    <div class="searched-subject-card">
+
+    <h2>{{ a_data.sub_name }}</h2>
+
+    <p>Subject ID: <strong>{{ a_data.sub_id }}</strong></p>
+
+    <p>Subject code: <strong>{{ a_data.sub_code }}</strong></p>
+
+    <p>Subject Type: <strong>{{ a_data.sub_type }}</strong></p>
+
+    <p>Subject Nature: <strong>{{ a_data.sub_nature }}</strong></p>
+
+    <p>Credit: <strong>{{ a_data.credit }}</strong></p>
+
+    <p>Total Topic: <strong>{{ topic_count }}</strong></p>
+
+    <p>Progress: <strong>{{ a_data.prog }}</strong></p>
+
+    <div class="delete-actions">
+
+        <a href="/subjects/" class="btn btn-secondary">Cancel</a>
+        <a href="/subjects/confirm/{{data.sub_name}}" class="btn btn-danger">Delete</a>
+    </div>
+
+</div>
+
+    {% endif %}
+
+    {% if error %}
+
+                <div class="error-page">
+
+        
+                <div class="error-card">
+
+                <div class="error-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                
+
+                <h4>Something went wrong</h4>
+
+                <p>
+                    {{error}}
+                </p>
+
+
+            </div>
+
+        </div>
+
+{% endif %}<br>
+
+    {% if data %}
+
+    <div class="searched-subject-card">
+
+    <h2>{{ data.sub_name }}</h2>
+
+    <p>Subject ID: <strong>{{ data.sub_id }}</strong></p>
+
+    <p>Subject code: <strong>{{ data.sub_code }}</strong></p>
+
+    <p>Subject Type: <strong>{{ data.sub_type }}</strong></p>
+
+    <p>Subject Nature: <strong>{{ data.sub_nature }}</strong></p>
+
+    <p>Credit: <strong>{{ data.credit }}</strong></p>
+    <p>Total Topic: <strong>{{ topic_count }}</strong></p>
+
+    <p>Progress: <strong>{{ data.prog }}</strong></p>
+
+    <div class="delete-actions">
+
+        <a href="/subjects/" class="btn btn-secondary">Cancel</a>
+        <a href="/subjects/confirm/{{data.sub_name}}" class="btn btn-danger">Delete</a>
+    </div>
+
+</div>
+
+    {% endif %}<br><br>
+
+    {% if con %}
+    <form method="POST">
+        {% csrf_token %}
+        Do You Want To delete this subjects<br>
+        <!-- <div class="form-actions"> -->
+
+                <button type="submit" class="btn btn-purple" name="c" value="Yes">
+                    Yes
+                </button>
+
+                <button type="submit" class="btn btn-purple" name="c" value="No">
+                    <i class="fa-solid fa-check"></i>
+                    No
+                </button>
+
+                
+
+            <!-- </div> -->
+        <!-- <input type="submit" name="c" value="Yes">    <input type="submit" name="c" value="Cencel"> -->
+    </form>
+    {% endif %}
+
+</div>
+    </div>
+
+    <!-- <form method="POST">
+        {% csrf_token %}
+        <input type="search" name="s"><br>
+        <input type="submit">
+    </form>
+
+    {% if data %}
+    <p>Subject ID:{{data.sub_id}}</p>
+    <p>Subject Name:{{data.sub_name}}</p>
+    <p>Subject Credit:{{data.credit}}</p>
+    <button><a href="/subjects/confirm/{{data.sub_id}}">Delete</a></button>
+    {% endif %}
+
+    {% if con %}
+    <form method="POST">
+        {% csrf_token %}
+        Do You Want To delete this subjects<br>
+        <input type="submit" name="c" value="Yes">    <input type="submit" name="c" value="Cencel">
+    </form>
+    {% endif %}
+
+    {% if error %}
+        <p>{{error}}</p>
+    {% endif %} -->
+{% endblock %}

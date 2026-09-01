@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+
+    <div class="app-container">
+
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <i class="fas fa-book"></i>
+            <h2>
+                Study Tracker
+                <span>Semester 3</span>
+            </h2>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="/deshboard_subjects/" class="nav-item ">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </a>
+
+            <a href="/subjects/" class="nav-item">
+                <i class="fas fa-book-open"></i>
+                Subjects
+            </a>
+
+            <a href="/topics/" class="nav-item">
+                <i class="fas fa-tasks"></i>
+                Topic
+            </a>
+
+            
+        </nav>
+
+        <div class="logout">
+            <a href="/login/" class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+    <div class="subject-page">
+
+    <div class="subject-page-header">
+        <div>
+            <h1>Delete Subject</h1>
+            <p>Search a subject to delete.</p>
+        </div>
+
+        <a href="/topics/" class="add-subject-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Topic
+        </a>
+    </div>
+
+    <form method="POST" action="/topics/searchtopic/" class="delete-search">
+            {% csrf_token %}
+            <div class="search-box">
+                <input type="text" placeholder="Search topics By Name" name="s" >
+            `   <button type="submit">🔍</button>
+        </div>
+        </form>
+        
+        <br><br>
+
+    <!-- ONLY SEARCHED SUBJECT DATA -->
+
+
+    {% if data %}
+    {% for i in data %}
+
+    <div class="single-subject-card">
+
+    <h1>{{ i.sub_id }}</h1>
+
+
+    <p><b>Topic ID:</b> {{ i.topic_id }}</p>
+
+    <p><b>Topic Name:</b> {{ i.topic_name }}</p>
+
+    <p><b>Topic nature:</b> {{ i.topic_nature }}</p>
+
+    <p><b>Date of Studied:</b> {{ i.date_studied }}</p>
+
+    <p><b>Difficulty:</b> {{ i.difficulty }}</p>
+
+    <p><b>Self Study:</b>
+        {% if i.self_study != null and i.self_study == "on" %}
+        Completed
+        {% else %}
+        Pendding
+        {% endif %}
+    </p>
+
+    <p><b>Overview:</b> {{i.overview }}</p>
+
+    
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if error %}
+
+                <div class="error-page">
+
+        
+                <div class="error-card">
+
+                <div class="error-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                
+
+                <h4>Something went wrong</h4>
+
+                <p>
+                    {{error}}
+                </p>
+
+
+            </div>
+
+        </div>
+
+{% endif %}<br>
+
+    
+
+    
+
+    </div>
+    </div>
+    
+    
+
+    
+{% endblock %}

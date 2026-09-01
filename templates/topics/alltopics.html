@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+<div class="app-container">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <i class="fas fa-book"></i>
+            <h2>
+                Study Tracker
+                <span>Semester 3</span>
+            </h2>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="/deshboard_subjects/" class="nav-item ">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </a>
+
+            <a href="/subjects/" class="nav-item">
+                <i class="fas fa-book-open"></i>
+                Subjects
+            </a>
+
+            <a href="/topics/" class="nav-item">
+                <i class="fas fa-tasks"></i>
+                Topic
+            </a>
+
+            
+        </nav>
+
+        <div class="logout">
+            <a href="/login/" class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+    <div class="topic-page">
+
+    <div class="topic-page-header">
+        <div>
+            <h1>Topics</h1>
+            <p>All topics organized by subject</p>
+        </div>
+
+        <a href="/topics/searchupdate/" class="add-subject-btn">
+            <i class="fa-solid fa-pen-to-square"></i>       Update Topic
+        </a>
+
+        <a href="/topics/searchdelete/" class="add-subject-btn">
+            <i class="fas fa-trash"></i>        Delete Topic
+        </a>
+
+        <a href="/topics/searchtopic/" class="add-subject-btn">
+            <i class="fas fa-trash"></i>        search Topic
+        </a>
+
+
+        <a href="/topics/add/" class="add-subject-btn" >+ Add Topic</a>
+    </div>
+
+
+    <!-- Java -->
+{% for i in sub %}
+    <div class="topic-section">
+
+        <h2>{{i.sub_name}}</h2>
+
+        {% for j in data %}
+
+        <div class="topic-list">
+         
+            {% if i.sub_id == j.sub_id_id %}
+            <table>
+            <div class="topic-item">
+                <tr>
+                <td style="width:50px"><span>{{forloop.counter}}</span></td>
+                <td style="width:210px"><p>{{j.topic_name}}</p></td>
+                <td style="width:150px"><p>{{j.date_studied}}</p></td>
+                <td style="width:100px"><p>{{j.difficulty}}</p></td>
+                <td style="width:120px"><p >Self Study      <input type="checkbox" {% if j.self_study != null and j.self_study == "on" %}checked{% endif %} class="topic-checkbox"></p></td>
+                <td style="width:300px"><p>{{j.overview}}</p></td>
+                </tr>
+            </div>
+            </table>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+      
+
+    </div>
+    
+
+
+    {% endfor %}
+
+    
+
+</div>
+
+
+    <!-- <table>
+        <tr>
+            <th>Topic ID</th>
+            <th>Topic Name</th>
+            <th>Topic Nature</th>
+            <th>Difficulty</th>
+            <th>Self Study</th>
+            <th align="center">Action</th>
+        </tr>
+
+        {% for i in data %}
+        <tr>
+            <td>{{i.topic_id}}</td>
+            <td>{{i.topic_name}}</td>
+            <td>{{i.topic_nature}}</td>
+            <td>{{i.difficulty}}</td>
+            <td><input  type="checkbox" {% if i.self_study != null and i.self_study == "on" %}checked{% endif %}></td>
+            <td><button><a href="/topics/update/{{i.topic_id}}">Edit</a></button>    <button><a href="/topics/delete/{{i.topic_id}}">Delete</a></button></td>
+        </tr>
+        {% endfor %}
+    </table> -->
+
+    </div>
+{% endblock %}

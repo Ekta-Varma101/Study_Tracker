@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+<div class="app-container">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <i class="fas fa-book"></i>
+            <h2>
+                Study Tracker
+                <span>Semester 3</span>
+            </h2>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="/deshboard_subjects/" class="nav-item ">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </a>
+
+            <a href="/subjects/" class="nav-item">
+                <i class="fas fa-book-open"></i>
+                Subjects
+            </a>
+
+            <a href="/topics/" class="nav-item">
+                <i class="fas fa-tasks"></i>
+                Topic
+            </a>
+
+            
+        </nav>
+
+        <div class="logout">
+            <a href="/login/" class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+    
+
+<div class="subject-page">
+
+    <div class="subject-page-header">
+        <div>
+            <h1>All Subjects</h1>
+            <p>View all your subjects</p>
+        </div>
+
+        <a href="/subjects/searchupdate/" class="add-subject-btn">
+            <i class="fa-solid fa-pen-to-square"></i>       Update Subject
+        </a>
+
+        <a href="/subjects/searchdelete/" class="add-subject-btn">
+            <i class="fas fa-trash"></i>        Delete Subject
+        </a>
+
+        <a href="/subjects/searchsinglesub/" class="add-subject-btn">
+            <i class="fas fa-trash"></i>        search Subject
+        </a>
+
+        <a href="/subjects/add/" class="add-subject-btn">
+            + Add Subject
+        </a>
+    </div>
+
+    <div class="subjects-table-container">
+
+        <table class="subjects-table">
+
+            <thead>
+                <tr>
+                    <th>Subject ID</th>
+                    <th>Code</th>
+                    <th>Subject Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for i in data %}
+
+                <tr>
+                    <td>{{ i.sub_id }}</td>
+                    <td>{{ i.sub_code }}</td>
+
+                    <td>
+                        <a href="/subjects/singlesub/{{i.sub_name}}" class="subject-name">
+                            {{ i.sub_name }}
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="/subjects/singlesub/{{i.sub_name}}" class="view-btn">
+                            View
+                        </a>
+                    </td>
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="5" class="no-subject">
+                        No subjects found
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    
+
+
+
+
+</div>
+</div>
+
+
+{% endblock %}
+    

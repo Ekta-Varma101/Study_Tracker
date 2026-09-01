@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+
+
+            <div class="app-container">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <i class="fas fa-book"></i>
+            <h2>
+                Study Tracker
+                <span>Semester 3</span>
+            </h2>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="/deshboard_subjects/" class="nav-item ">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </a>
+
+            <a href="/subjects/" class="nav-item">
+                <i class="fas fa-book-open"></i>
+                Subjects
+            </a>
+
+            <a href="/topics/" class="nav-item">
+                <i class="fas fa-tasks"></i>
+                Topic
+            </a>
+
+            
+        </nav>
+
+        <div class="logout">
+            <a href="/login/" class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <div class="dashboard-header">
+            <h1>Dashboard</h1>
+            <p>Welcome back! Track your Semester 3 study progress.</p>
+        </div>
+
+
+        <!-- Statistics -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <i class="fas fa-book"></i>
+                <h3>{{sub_count}}</h3>
+                <p>Total Subjects</p>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-tasks"></i>
+                <h3>{{topic_count}}</h3>
+                <p>Total Topics</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>{{practical_count}}</h3>
+                <p>Practical Subjects</p>
+                <h3>{{theory_count}}</h3>
+                <p>Theory Subjects</p>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>{{progress}}%</h3>
+                <p>Overall Progress</p>
+            </div>
+
+        </div>
+
+
+        <!-- Subjects -->
+
+        <section class="dashboard-section">
+
+            <h2>My Subjects</h2>
+
+
+            <div class="subject-grid">
+
+                {% for i in data %}
+                <div class="subject-card">
+                    <h3>{{i.sub_name}}</h3>
+                    <p>{{i.sub_type}}</p>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{i.prog}}%;"></div>
+                    </div>
+
+                    <div class="progress-info">
+                        <span>Progress</span>
+                        <span>{{i.prog}}%</span>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+        </section>
+
+
+        <!-- Today's Tasks -->
+
+        
+
+
+        <section class="todays-zone">
+
+    <div class="zone-left">
+
+        <div class="zone-title">
+            <i class="fas fa-bolt"></i>
+            <span>TODAY'S ZONE</span>
+            <span>⚡</span>
+        </div>
+
+        <h2>
+            Code Today.<br>
+            <span>Create Tomorrow.</span>
+        </h2>
+
+        <p>Keep learning. Keep growing.</p>
+
+        <div class="zone-author">
+            —  <span>Ekta Varma</span>
+        </div>
+
+    </div>
+
+    <div class="zone-right">
+        <img src="https://images7.alphacoders.com/133/thumb-1920-1337527.png" alt="Coding workspace">
+    </div>
+
+</section>
+
+    </main>
+
+</div>
+            
+
+
+
+{% endblock %}

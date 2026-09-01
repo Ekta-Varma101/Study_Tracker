@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+
+<div class="app-container">
+
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <i class="fas fa-book"></i>
+            <h2>
+                Study Tracker
+                <span>Semester 3</span>
+            </h2>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="/deshboard_subjects/" class="nav-item ">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </a>
+
+            <a href="/subjects/" class="nav-item">
+                <i class="fas fa-book-open"></i>
+                Subjects
+            </a>
+
+            <a href="/topics/" class="nav-item">
+                <i class="fas fa-tasks"></i>
+                Topic
+            </a>
+
+            
+        </nav>
+
+        <div class="logout">
+            <a href="/login/" class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+<div class="subject-page">
+
+    <div class="subject-page-header">
+        <div>
+            <h1>Update Subject</h1>
+            <p>Update the details of your subject.</p>
+        </div>
+
+        <a href="/subjects/" class="add-subject-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Subjects
+        </a>
+    </div>
+    
+    <form method="POST" action="/subjects/searchupdate/" class="delete-search" >
+            {% csrf_token %}
+            <div class="search-box">
+                <input type="text" placeholder="Search topics By Name" name="s" >
+            `   <button type="submit">🔍</button>
+        </div>
+    </form>
+        <br><br>
+
+
+    <div class="add-subject-card">
+
+        <div class="form-title">
+            <div class="form-icon">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+
+            <div>
+                <h2>Edit Subject Details</h2>
+                <p>Make changes to the subject information.</p>
+            </div>
+        </div>
+        
+         {% if error %}
+
+                <div class="error-page">
+
+        
+                <div class="error-card">
+
+                <div class="error-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                
+
+                <h4>Something went wrong</h4>
+
+                <p>
+                    {{error}}
+                </p>
+
+
+            </div>
+
+        </div>
+
+{% endif %}
+<br><br>
+
+        
+        
+
+
+        <form method="POST">
+
+            <!-- Django ke liye -->
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="subject_id">Subject ID</label>
+
+                <input
+                    type="text"
+                    id="subt_id"
+                    name="sub_id"
+                    value="{{ data.sub_id }}"
+                    placeholder="Enter subject id"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="subject_name">Subject Name</label>
+
+                <input
+                    type="text"
+                    id="sub_name"
+                    name="sub_name"
+                    value="{{ data.sub_name }}"
+                    placeholder="Enter subject name"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="subject_code">Subject Code</label>
+
+                <input
+                    type="text"
+                    id="sub_name"
+                    name="sub_code"
+                    value="{{ data.sub_code }}"
+                    placeholder="Enter subject code"
+                >
+            </div>
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+                    <label for="sub_type">Subject Type</label>
+
+                    <select id="sub_type" name="sub_type">
+
+
+                        <option >-----Choose Type Of subject-------</option>
+                        <option {% if data.sub_type == "Major" %}selected{% endif %}>Major</option>
+                        <option {% if data.sub_type == "Minor" %}selected{% endif %}>Minor</option>
+                        <option {% if data.sub_type == "MDC" %}selected{% endif %}>MDC</option>
+                        <option {% if data.sub_type == "AEC" %}selected{% endif %}>AEC</option>
+                        <option {% if data.sub_type == "SEC" %}selected{% endif %}>SEC</option>
+                        <option {% if data.sub_type == "VAC" %}selected{% endif %}>VAC</option>
+
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="subject_nature">Subject Nature</label>
+
+                    <select id="sub_nature" name="sub_nature">
+                        <option>--------Choose Subject Nature--------</option>
+                        <option {% if data.sub_nature == "Practical" %}selected{% endif %}>Practical</option>
+                        <option {% if data.sub_nature == "Theory" %}selected{% endif %}>Theory</option>
+                        <option {% if data.sub_nature == "Both" %}selected{% endif %}>Both</option>
+                       
+
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <lable>Description:</lable>
+                <textarea cols="100" rows="5" name="desc">{{data.desc}}</textarea>     
+            
+            </div>
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+                    <label for="credit">Credit</label>
+
+                    <input type="number" value="{{data.credit}}" name="credit">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="progress">Progress</label>
+
+                    <input  id="sub_progress" name="progress" value="{{data.prog}}">
+                </div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button type="submit" class="btn btn-purple">
+                    <i class="fa-solid fa-check"></i>
+                    Update Subject
+                </button>
+
+                <a href="/subjects/" class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+    </div>
+
+    
+    
+{% endblock %}

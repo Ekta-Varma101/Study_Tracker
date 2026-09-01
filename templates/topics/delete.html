@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+
+    <div class="app-container">
+
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <i class="fas fa-book"></i>
+            <h2>
+                Study Tracker
+                <span>Semester 3</span>
+            </h2>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="/deshboard_subjects/" class="nav-item ">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </a>
+
+            <a href="/subjects/" class="nav-item">
+                <i class="fas fa-book-open"></i>
+                Subjects
+            </a>
+
+            <a href="/topics/" class="nav-item">
+                <i class="fas fa-tasks"></i>
+                Topic
+            </a>
+
+            
+           
+        </nav>
+
+        <div class="logout">
+            <a href="/login/" class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+    <div class="subject-page">
+
+    <div class="subject-page-header">
+        <div>
+            <h1>Delete Subject</h1>
+            <p>Search a subject to delete.</p>
+        </div>
+
+        <a href="/topics/" class="add-subject-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Subjects
+        </a>
+    </div>
+
+    <form method="POST" action="/topics/searchdelete/" class="delete-search">
+            {% csrf_token %}
+            <div class="search-box">
+                <input type="text" placeholder="Search topics By ID" name="s" >
+            `   <button type="submit">🔍</button>
+        </div>
+        </form>
+        
+        <br><br>
+
+    <!-- ONLY SEARCHED SUBJECT DATA -->
+    
+
+    {% if error %}
+
+                <div class="error-page">
+
+        
+                <div class="error-card">
+
+                <div class="error-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                
+
+                <h4>Something went wrong</h4>
+
+                <p>
+                    {{error}}
+                </p>
+
+
+            </div>
+
+        </div>
+
+{% endif %}<br>
+
+    {% if data %}
+    
+
+    <div class="searched-subject-card">
+
+    <h2>{{ data.sub_id }}</h2>
+
+    <p>Topic Name: <strong>{{ data.topic_name }}</strong></p>
+
+    <p>Topic ID: <strong>{{ data.topic_id }}</strong></p>
+
+    <p>Topic Nature: <strong>{{ data.topic_nature }}</strong></p>
+
+    <p>Date Of Studied: <strong>{{ data.data_studied }}</strong></p>
+
+    <p>Difficulty: <strong>{{ data.difficulty }}</strong></p>
+
+    <p>Self Study: <strong>
+        {% if data.self_study != null and data.self_study == "on" %}
+        Completed
+        {% else %}
+        Pendding
+        {% endif %}
+    </strong></p>
+
+    <p>Overview: <strong>{{ data.overview }}</strong></p>
+
+    <div class="delete-actions">
+
+        <a href="/topics/" class="btn btn-secondary">Cancel</a>
+        <a href="/topics/confirm/{{data.topic_id}}" class="btn btn-danger">Delete</a>
+    </div>
+
+</div>
+
+
+    {% endif %}<br><br>
+
+    {% if a_data %}
+    
+
+    <div class="searched-subject-card">
+
+    <h2>{{ a_data.sub_id }}</h2>
+
+    <p>Topic Name: <strong>{{ a_data.topic_name }}</strong></p>
+
+    <p>Topic ID: <strong>{{ a_data.topic_id }}</strong></p>
+
+    <p>Topic Nature: <strong>{{ a_data.topic_nature }}</strong></p>
+
+    <p>Date Of Studied: <strong>{{ a_data.data_studied }}</strong></p>
+
+    <p>Difficulty: <strong>{{ a_data.difficulty }}</strong></p>
+
+    <p>Self Study: <strong>
+        {% if a_data.self_study != null and a_data.self_study == "on" %}
+        Completed
+        {% else %}
+        Pendding
+        {% endif %}
+    </strong></p>
+
+    <p>Overview: <strong>{{ a_data.overview }}</strong></p>
+
+    
+</div>
+{% endif %}
+
+    {% if con %}
+    <form method="POST">
+        {% csrf_token %}
+        Do You Want To delete this Topic<br>
+        <!-- <div class="form-actions"> -->
+
+                <button type="submit" class="btn btn-purple" name="c" value="Yes">
+                    Yes
+                </button>
+
+                <button type="submit" class="btn btn-purple" name="c" value="No">
+                    <i class="fa-solid fa-check"></i>
+                    No
+                </button>
+
+                
+
+            
+    </form>
+    {% endif %}
+
+</div>
+    </div>
+
+    
+{% endblock %}

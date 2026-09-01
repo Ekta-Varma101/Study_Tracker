@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semester 3 Study Tracker</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body >
+
+<section class="auth-section">
+        <!-- LOGIN CARD -->
+         {% if data %}
+        <div class="auth-card" style="height: 450px;">
+            <div class="auth-header" >
+                <i class="fa-solid fa-book-bookmark auth-logo"></i>
+                <h2>Welcome Back!</h2>
+                <p>Login to continue your learning journey</p>
+            </div>
+            <form class="auth-form" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" placeholder="Enter your username" name="username">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" name="pwd">
+                </div>
+                <div class="auth-options">
+                    <label><input type="checkbox"> Remember me</label>
+                    <a href="#" class="forgot-pass">Forgot Password?</a>
+                </div>
+                
+                
+                
+                <button type="submit" class="btn btn-purple btn-full">Login</button>
+            </form>
+            <p class="auth-footer">Don't have an account? <a href="/signup/">Sign up</a></p>{% endif %}
+
+            {% if error %}
+
+                
+
+        
+                <div class="error-card">
+
+                <div class="error-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                
+
+                <h4>Something went wrong</h4>
+
+                <p>
+                    {{error}}
+                </p>
+
+                <p class="auth-footer">Try Again <a href="/">Login</a></p>
+
+
+           
+
+        </div>
+
+{% endif %}<br>
+        </div>
+
+
+</section>
+</body>
+</html>
+

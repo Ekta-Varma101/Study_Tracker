@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Tracker - Complete Dark Purple Theme</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body bgcolor="pink">
+
+<section class="auth-section" style="display: flex; justify-content: center; flex-wrap: center; align-items: center;">
+        
+        <!-- LOGIN CARD -->
+         <div class="auth-card">
+            <div class="auth-header" >
+                <i class="fa-solid fa-book-bookmark auth-logo"></i>
+                <h2>Welcome Back!</h2>
+                <p>Login to continue your learning journey</p>
+            </div>
+            <form class="auth-form" method="POST" >
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your Full name" name="full_name">
+                </div>
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" placeholder="Enter your username" name="username">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter your email" name="email">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" name="pwd">
+                </div>
+
+                <div class="auth-options">
+                    <label><input type="checkbox"> Remember me</label>
+                    <a href="#" class="forgot-pass">Forgot Password?</a>
+                </div>
+
+                {% if error %}
+
+                
+
+        
+                <div class="error-card">
+
+                <div class="error-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                
+
+                <h4>Something went wrong</h4>
+
+                <p>
+                    {{error}}
+                </p>
+
+
+           
+
+        </div>
+
+{% endif %}<br>
+                <button type="submit" class="btn btn-purple btn-full">Signup</button>
+            </form>
+            <p class="auth-footer">have an account? <a href="{% url 'login' %}">Login</a></p>
+        </div>
+
+
+</section>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Login Page</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <table border="2">
+            <tr>
+                <td><lable>Username:</lable></td>
+                <td><input type="text" name="username"></td>
+            </tr>
+
+            <tr>
+                <td><lable>Password:</lable></td>
+                <td><input type="password" name="pwd"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Register"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Register Page</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <table border="2">
+            <tr>
+                <td><lable>Username:</lable></td>
+                <td><input type="text" name="username"></td>
+            </tr>
+
+            <tr>
+                <td><lable>Password:</lable></td>
+                <td><input type="password" name="pwd"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Register"></td>
+            </tr>
+        </table>
+    </form>
+
+    <a href="/login/">already have an accout login</a>
+</body>
+</html> -->

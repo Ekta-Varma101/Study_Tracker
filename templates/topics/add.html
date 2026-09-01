@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+<div class="app-container">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <i class="fas fa-book"></i>
+            <h2>
+                Study Tracker
+                <span>Semester 3</span>
+            </h2>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="/deshboard_subjects/" class="nav-item ">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </a>
+
+            <a href="/subjects/" class="nav-item">
+                <i class="fas fa-book-open"></i>
+                Subjects
+            </a>
+
+            <a href="/topics/" class="nav-item">
+                <i class="fas fa-tasks"></i>
+                Topic
+            </a>
+
+            
+        </nav>
+
+        <div class="logout">
+            <a href="/login/" class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+    <div class="subject-page">
+
+    <div class="subject-page-header">
+        <div>
+            <h1>Add Subject</h1>
+            <p>Add a new subject to your study list.</p>
+        </div>
+
+        <a href="/topics/" class="add-subject-btn">← Back to Topics</a>
+    </div>
+
+
+    <div class="add-subject-card">
+
+        <div class="form-title">
+            <div class="form-icon">
+                <i class="fa-solid fa-book"></i>
+            </div>
+
+            <div>
+                <h2>Subject Details</h2>
+                <p>Enter the details of the new subject.</p>
+            </div>
+        </div>
+
+        {% if error %}
+
+                <div class="error-page">
+
+        
+                <div class="error-card">
+
+                <div class="error-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                
+
+                <h4>Something went wrong</h4>
+
+                <p>
+                    {{error}}
+                </p>
+
+
+            </div>
+
+        </div>
+
+{% endif %}
+
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+            <lable>Subject Name:</lable>
+                <select name="sub_id">
+                    {% for i in sub %}
+                    <option value="{{i.sub_id}}">{{i.sub_name}}</option>
+                    {% endfor %}
+                </select>
+                </div>
+
+            <div class="form-group">
+            
+                <label for="topic_id">Topic ID:</label>
+                <input type="text" name="topic_id">
+            
+            </div>
+
+            <div class="form-group">
+            
+                <label for="topic_name">Topic Name:</label>
+                <input type="test" name="topic_name">
+            
+            </div>
+
+            <div class="form-group">
+            
+                <lable>Topic Nature:</lable>
+                <select name="topic_nature">
+                    <option>Theory</option>
+                    <option>Practical</option>
+                    <option>Both</option>
+                </select>
+            
+            </div>
+
+
+            <div class="form-group">
+                <lable>Date Studied:</lable>
+                <input type="date" name="date_studied">
+            </div>
+
+            <div class="form-group">
+                <lable>Difficulty:</lable>
+                <select name="difficulty">
+                    <option>Hard</option>
+                    <option>Medium</option>
+                    <option>Easy</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <lable>Self Study:</lable>
+                <input type="checkbox" name="self_study" class="topic-checkbox">
+            </div>
+
+            <div class="form-group">
+                <lable>Overview:</lable>
+                <textarea cols="100" rows="5" name="overview"></textarea>     
+            
+            </div>
+
+
+            <div class="form-actions">
+
+                <button type="submit" class="btn btn-purple">
+                    <i class="fa-solid fa-plus"></i>
+                    Add Subject
+                </button>
+
+                <a href="#" class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+    <!-- <form method="post">
+        {% csrf_token %}
+        <table border="2">
+            <tr>
+                <td><lable>Topic ID:</lable></td>
+                <td><input type="text" name="topic_id"></td>
+            </tr>
+
+            <tr>
+                <td><lable>Subject ID:</lable></td>
+                <td><select name="sub_id">
+                    {% for i in sub %}
+                    <option>{{i.sub_id}}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+
+            <tr>
+                <td><lable>Topic Name:</lable></td>
+                <td><input type="text" name="topic_name"></td>
+            </tr>
+
+            <tr>
+                <td><lable>Topic Nature:</lable></td>
+                <td><select name="topic_nature">
+                    <option>Theory</option>
+                    <option>Practical</option>
+                    <option>Both</option>
+                </select></td>
+            </tr>
+
+            <tr>
+                <td><lable>Date Studied:</lable></td>
+                <td><input type="date" name="date_studied"></td>
+            </tr>
+
+            <tr>
+                <td><lable>Difficulty:</lable></td>
+                <td><select name="difficulty">
+                    <option>Hard</option>
+                    <option>Medium</option>
+                    <option>Easy</option>
+                </select></td>
+            </tr>
+
+            <tr>
+                <td><lable>Self Study:</lable></td>
+                <td><input type="checkbox" name="self_study"></td>
+            </tr>
+
+            <tr>
+                <td><lable>Overview:</lable></td>
+                <td><textarea cols="34" rows="6" name="overview"> </textarea></td>
+            </tr>
+
+            <tr>
+                <td colspna="2" align="center"><input type="submit" ></td>
+            </tr>
+        </table>
+    </form> -->
+    </div>
+    
+{% endblock %}
